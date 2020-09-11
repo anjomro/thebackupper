@@ -1,5 +1,7 @@
 FROM alpine
 WORKDIR /thebackupper
+RUN apk update && \	
+	apk add bash openssl rclone zip && \
+	mkdir /thebackupper/tobackup/
 COPY src /thebackupper/
-RUN apk add openssl rclone && mkdir /thebackupper/tobackup/
-ENTRYPOINT /thebackupper/src/start.sh
+ENTRYPOINT bash -c "/thebackupper/start.sh"
