@@ -1,10 +1,15 @@
 # The Backupper
 ### Quickstart
 - Prerequisites: Docker installed and Linux (obviously)
-- Creating a config file:
-  - Install rclone (e.g. sudo apt install rclone)
-  - Call `rclone config` and follow the steps
+- Configure remote destination with wizard:
+  ~~~
+	docker run -it --rm \
+		--entrypoint "/thebackupper/config.sh" \
+		-v /home/$USER/.config/rclone/:/rc \
+		anjomro/thebackupper
+  ~~~
   - Your config file is generated in `~/.config/rclone/rclone.conf`
+
 - Private/Public Key File: Needs to be compliant with PKCS#8, mount public key.
   - A PKCS#8 compliant public key has `BEGIN PUBLIC KEY` in the header
   - Private/Public Key-Pair can be generated like this:
@@ -26,7 +31,7 @@ You need to modify the paths to fit your files and can edit the names to your ta
   - Backup Paths:
     - Just mount everything you want to backup inside of /backup/ or subdirectories
   - Remote config
-    - Mount config file for rclone at `/remote.conf`
+    - Mount config file for rclone (generated earlier) at `/rc/rclone.conf`
   - Public Key
     - Mount Public Key at `public_key.pem`
     - If you dont whish to encrypt your Backup just omit the public key
@@ -39,7 +44,7 @@ docker run --rm \
 	-e name=myserver
 	-v /path/to/backup:/backup/A/ \
 	-v /another/backup:/backup/B/ \
-	-v /home/$USER/.config/rclone/rclone.conf:/remote.conf \
+	-v /home/$USER/.config/rclone/rclone.conf:/rc/rclone.conf \
 	-v /public/key.pem:/public_key.pem \
 	anjomro/thebackupper
 

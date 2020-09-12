@@ -28,15 +28,15 @@ if [[ -v $remotepath ]]; then
 fi
 
 if [[ -v remote ]]; then
-	if [[ -f "/remote.conf" ]]; then
+	if [[ -f "/rc/rclone.conf" ]]; then
 		echo "Uploading to $remote"
 		echo "#!/bin/bash" > decryptBackup.sh
 		echo "todecrypt=$originalbackupname" >> decryptBackup.sh
 		cat decrypt.sh >> decryptBackup.sh
 		chmod +x decryptBackup.sh
-		rclone --config=/remote.conf copy /thebackupper/key.bin.enc $remote:$remotepath/$nameprefix/
-		rclone --config=/remote.conf copy /thebackupper/$backupname $remote:$remotepath/$nameprefix/
-		rclone --config=/remote.conf copy /thebackupper/decryptBackup.sh $remote:$remotepath/$nameprefix/
+		rclone --config=/rc/rclone.conf copy /thebackupper/key.bin.enc $remote:$remotepath/$nameprefix/
+		rclone --config=/rc/rclone.conf copy /thebackupper/$backupname $remote:$remotepath/$nameprefix/
+		rclone --config=/rc/rclone.conf copy /thebackupper/decryptBackup.sh $remote:$remotepath/$nameprefix/
 		echo "Upload finished!"
 	else
 		echo "No config file mounted!"
