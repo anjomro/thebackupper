@@ -32,9 +32,10 @@ You need to modify the paths to fit your files and can edit the names to your ta
     - Just mount everything you want to backup inside of /backup/ or subdirectories
   - Remote config
     - Mount config file for rclone (generated earlier) at `/rc/rclone.conf`
-  - Public Key
-    - Mount Public Key at `public_key.pem`
-    - If you dont whish to encrypt your Backup just omit the public key
+  - Public Key(s)
+    - Mount Public Keys in folder `/pub/`
+    - The Key of the Backup is encrypted with each pubkey, so each private key can decrypt the Backup
+    - If you dont whish to encrypt your Backup just don't mount any public keys.
 
 Example Command:
 ~~~
@@ -45,7 +46,7 @@ docker run --rm \
 	-v /path/to/backup:/backup/A/ \
 	-v /another/backup:/backup/B/ \
 	-v /home/$USER/.config/rclone/rclone.conf:/rc/rclone.conf \
-	-v /public/key.pem:/public_key.pem \
+	-v /public/key.pem:/pub/ \
 	anjomro/thebackupper
 
 ~~~
