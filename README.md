@@ -1,4 +1,8 @@
 # The Backupper
+What does it do? It backups stuff, especially confidential stuff from your linux server. To keep everything secure prior to copying the archive of everything you want to backup to the selected cloud service it all gets encrypted using a public key you selected beforehand (so, a random key gets encrypted with RSA and the archive is then encrypted with AES). So if you keep your private key somewhere secure your data is pretty secure, too. Well and you can even use multiple Key pairs so you can access your data even with your spare key you hid under the doormat (don't worry, i won't tell anybody).
+
+Licensed under the European Union Public Licence.
+
 ### Quickstart
 - Prerequisites: Docker installed and Linux (obviously)
 - Configure remote destination with wizard:
